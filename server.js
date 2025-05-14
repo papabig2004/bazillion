@@ -24,53 +24,53 @@ app.post('/api/lead', async (req, res) => {
     try {
         const { name, phone, center } = req.body;
         
-        // Настройки amoCRM
-        const AMO_DOMAIN = process.env.AMO_DOMAIN;
-        const AMO_ACCESS_TOKEN = process.env.AMO_ACCESS_TOKEN;
+        console.log('Получены данные формы:', {
+            name,
+            phone,
+            center,
+            timestamp: new Date().toISOString()
+        });
         
-        if (!AMO_DOMAIN || !AMO_ACCESS_TOKEN) {
-            console.error('AMO_DOMAIN или AMO_ACCESS_TOKEN не настроены');
+        // Отправка данных в Bitrix24
+        const BITRIX_WEBHOOK_URL = process.env.BITRIX_WEBHOOK_URL;
+        
+        if (!BITRIX_WEBHOOK_URL) {
+            console.error('BITRIX_WEBHOOK_URL не настроен');
             return res.status(500).json({ success: false, message: 'Ошибка конфигурации сервера' });
         }
 
-        const amoData = {
-            name: `Заявка с сайта - ${center}`,
-            price: 0,
-            responsible_user_id: 0, // ID ответственного менеджера
-            pipeline_id: 0, // ID воронки
-            status_id: 0, // ID статуса
-            custom_fields_values: [
-                {
-                    field_id: 0, // ID поля для телефона
-                    values: [
-                        {
-                            value: phone
-                        }
-                    ]
-                },
-                {
-                    field_id: 0, // ID поля для центра
-                    values: [
-                        {
-                            value: center
-                        }
-                    ]
-                }
-            ]
+        const bitrixData = {
+            fields: {
+                TITLE: `Заявка с сайта - ${center}`,
+                NAME: name,
+                PHONE: [{ VALUE: phone, VALUE_TYPE: 'WORK' }],
+                COMMENTS: `Центр: ${center}`,
+                SOURCE_ID: 'WEB',
+                SOURCE_DESCRIPTION: 'Заявка с сайта Базиллион'
+            }
         };
 
-        const headers = {
-            'Authorization': `Bearer ${AMO_ACCESS_TOKEN}`,
-            'Content-Type': 'application/json'
-        };
+        console.log('Подготовлены данные для отправки в Bitrix24:', {
+            webhook_url: BITRIX_WEBHOOK_URL,
+            data: bitrixData,
+            timestamp: new Date().toISOString()
+        });
 
-        await axios.post(`https://${AMO_DOMAIN}/api/v4/leads`, amoData, { headers });
+        const response = await axios.post(BITRIX_WEBHOOK_URL, bitrixData);
         
-        console.log('Lead sent to amoCRM:', { name, phone, center });
+        console.log('Ответ от Bitrix24:', {
+            status: response.status,
+            data: response.data,
+            timestamp: new Date().toISOString()
+        });
         
-        res.json({ success: true, message: 'Lead received and sent to amoCRM successfully' });
+        res.json({ success: true, message: 'Lead received and sent to Bitrix24 successfully' });
     } catch (error) {
-        console.error('Error processing lead:', error);
+        console.error('Ошибка при обработке заявки:', {
+            error: error.message,
+            stack: error.stack,
+            timestamp: new Date().toISOString()
+        });
         res.status(500).json({ success: false, message: 'Error processing lead' });
     }
 });
