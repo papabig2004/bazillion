@@ -31,14 +31,22 @@ app.post('/api/lead', async (req, res) => {
             timestamp: new Date().toISOString()
         });
         
-        // Отправка данных в Bitrix24
-        const BITRIX_WEBHOOK_URL = process.env.BITRIX_WEBHOOK_URL;
+        // Настройки Bitrix24
+        const BITRIX_DOMAIN = process.env.BITRIX_DOMAIN; // например: your-domain.bitrix24.ru
+        const BITRIX_USER_ID = process.env.BITRIX_USER_ID; // ID пользователя
+        const BITRIX_WEBHOOK_TOKEN = process.env.BITRIX_WEBHOOK_TOKEN; // токен вебхука
         
-        if (!BITRIX_WEBHOOK_URL) {
-            console.error('BITRIX_WEBHOOK_URL не настроен');
+        if (!BITRIX_DOMAIN || !BITRIX_USER_ID || !BITRIX_WEBHOOK_TOKEN) {
+            console.error('Не настроены параметры Bitrix24:', {
+                domain: BITRIX_DOMAIN ? '✓' : '✗',
+                userId: BITRIX_USER_ID ? '✓' : '✗',
+                token: BITRIX_WEBHOOK_TOKEN ? '✓' : '✗'
+            });
             return res.status(500).json({ success: false, message: 'Ошибка конфигурации сервера' });
         }
 
+        const bitrixUrl = `https://${BITRIX_DOMAIN}/rest/${BITRIX_USER_ID}/${BITRIX_WEBHOOK_TOKEN}/crm.lead.add.json`;
+        
         const bitrixData = {
             fields: {
                 TITLE: `Заявка с сайта - ${center}`,
@@ -51,12 +59,12 @@ app.post('/api/lead', async (req, res) => {
         };
 
         console.log('Подготовлены данные для отправки в Bitrix24:', {
-            webhook_url: BITRIX_WEBHOOK_URL,
+            url: bitrixUrl,
             data: bitrixData,
             timestamp: new Date().toISOString()
         });
 
-        const response = await axios.post(BITRIX_WEBHOOK_URL, bitrixData);
+        const response = await axios.post(bitrixUrl, bitrixData);
         
         console.log('Ответ от Bitrix24:', {
             status: response.status,
