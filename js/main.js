@@ -250,8 +250,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Отправка данных на Render backend
-            fetch('https://bazillion.onrender.com', {
+            // Отправка данных на сервер
+            fetch('/api/lead', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -262,55 +262,61 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(res => res.json())
             .then(data => {
-                console.log('Render backend response:', data);
+                console.log('Server response:', data);
+                if (data.success) {
+                    // Успех: скрыть форму, заменить заголовок, убрать сообщение под формой, запустить конфетти
+                    bookingForm.style.display = 'none';
+                    const bookingModalTitle = bookingModal.querySelector('.modal__title');
+                    if (bookingModalTitle) {
+                        bookingModalTitle.textContent = 'Наши операторы свяжутся с вами в ближайшее время!';
+                    }
+                    bookingFormMessage.textContent = '';
+                    bookingFormMessage.className = 'form-message';
+
+                    // Яркое и продолжительное конфетти (3 секунды, с разных точек по краям экрана)
+                    if (window.confetti) {
+                        let confettiDuration = 3000; // 3 секунды
+                        let interval = 120;
+                        let elapsed = 0;
+                        let confettiInterval = setInterval(() => {
+                            // Левый край
+                            confetti({
+                                particleCount: 90,
+                                spread: 120,
+                                startVelocity: 60,
+                                origin: {
+                                    x: 0,
+                                    y: Math.random() * 0.7 + 0.1 // от 0.1 до 0.8
+                                },
+                                angle: 60 + Math.random() * 20 // 60-80 градусов
+                            });
+                            // Правый край
+                            confetti({
+                                particleCount: 90,
+                                spread: 120,
+                                startVelocity: 60,
+                                origin: {
+                                    x: 1,
+                                    y: Math.random() * 0.7 + 0.1
+                                },
+                                angle: 100 + Math.random() * 20 // 100-120 градусов
+                            });
+                            elapsed += interval;
+                            if (elapsed >= confettiDuration) {
+                                clearInterval(confettiInterval);
+                            }
+                        }, interval);
+                    }
+                } else {
+                    bookingFormMessage.textContent = 'Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже.';
+                    bookingFormMessage.className = 'form-message form-message--error';
+                }
             })
             .catch(error => {
-                console.error('Error sending data to Render backend:', error);
+                console.error('Error sending data to server:', error);
+                bookingFormMessage.textContent = 'Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже.';
+                bookingFormMessage.className = 'form-message form-message--error';
             });
-
-            // Успех: скрыть форму, заменить заголовок, убрать сообщение под формой, запустить конфетти
-            bookingForm.style.display = 'none';
-            const bookingModalTitle = bookingModal.querySelector('.modal__title');
-            if (bookingModalTitle) {
-                bookingModalTitle.textContent = 'Наши операторы свяжутся с вами в ближайшее время!';
-            }
-            bookingFormMessage.textContent = '';
-            bookingFormMessage.className = 'form-message';
-
-            // Яркое и продолжительное конфетти (3 секунды, с разных точек по краям экрана)
-            if (window.confetti) {
-                let confettiDuration = 3000; // 3 секунды
-                let interval = 120;
-                let elapsed = 0;
-                let confettiInterval = setInterval(() => {
-                    // Левый край
-                    confetti({
-                        particleCount: 90,
-                        spread: 120,
-                        startVelocity: 60,
-                        origin: {
-                            x: 0,
-                            y: Math.random() * 0.7 + 0.1 // от 0.1 до 0.8
-                        },
-                        angle: 60 + Math.random() * 20 // 60-80 градусов
-                    });
-                    // Правый край
-                    confetti({
-                        particleCount: 90,
-                        spread: 120,
-                        startVelocity: 60,
-                        origin: {
-                            x: 1,
-                            y: Math.random() * 0.7 + 0.1
-                        },
-                        angle: 100 + Math.random() * 20 // 100-120 градусов
-                    });
-                    elapsed += interval;
-                    if (elapsed >= confettiDuration) {
-                        clearInterval(confettiInterval);
-                    }
-                }, interval);
-            }
         });
     }
 }); 
