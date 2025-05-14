@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
             bookingForm.style.display = 'none';
             const bookingModalTitle = bookingModal.querySelector('.modal__title');
             if (bookingModalTitle) {
-                bookingModalTitle.textContent = 'Наши операторы свяжутся с вами в течение 5 минут!';
+                bookingModalTitle.textContent = 'Наши операторы свяжутся с вами в ближайшее время!';
             }
             bookingFormMessage.textContent = '';
             bookingFormMessage.className = 'form-message';
