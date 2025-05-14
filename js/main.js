@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Отправка данных на Render backend
-            fetch('/api/lead', {
+            fetch('https://bazillion.onrender.com', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
