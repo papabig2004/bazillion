@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -35,6 +36,12 @@ app.post('/api/lead', async (req, res) => {
         const BITRIX_DOMAIN = process.env.BITRIX_DOMAIN; // например: your-domain.bitrix24.ru
         const BITRIX_USER_ID = process.env.BITRIX_USER_ID; // ID пользователя
         const BITRIX_WEBHOOK_TOKEN = process.env.BITRIX_WEBHOOK_TOKEN; // токен вебхука
+        
+        console.log('Параметры Bitrix24:', {
+            domain: BITRIX_DOMAIN,
+            userId: BITRIX_USER_ID,
+            token: BITRIX_WEBHOOK_TOKEN ? '***' : undefined
+        });
         
         if (!BITRIX_DOMAIN || !BITRIX_USER_ID || !BITRIX_WEBHOOK_TOKEN) {
             console.error('Не настроены параметры Bitrix24:', {
