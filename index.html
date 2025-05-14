@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Базиллион - развлекательный центр для всей семьи">
+    <title>Базиллион - Развлекательный центр</title>
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <a href="/" class="header__logo">
+                    <img src="images/logo/logo.png" alt="Базиллион" width="180" height="90">
+                </a>
+                <nav class="header__nav">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#prices" class="nav__link">Цены</a>
+                        </li>
+                        <li class="nav__item">
+                            <button class="nav__link" id="scheduleBtn">Расписание</button>
+                        </li>
+                        <li class="nav__item nav__item--contacts" style="position: relative;">
+                            <a href="#" class="nav__link" id="contactsBtn">Контакты</a>
+                            <div class="contacts-dropdown" id="contactsDropdown">
+                                <a href="https://instagram.com/bazillion_minsk" target="_blank" class="contacts-dropdown__item">
+                                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="M7.75 2A5.75 5.75 0 0 0 2 7.75v8.5A5.75 5.75 0 0 0 7.75 22h8.5A5.75 5.75 0 0 0 22 16.25v-8.5A5.75 5.75 0 0 0 16.25 2h-8.5ZM12 7.25A4.75 4.75 0 1 1 7.25 12 4.75 4.75 0 0 1 12 7.25Zm0 1.5A3.25 3.25 0 1 0 15.25 12 3.25 3.25 0 0 0 12 8.75Zm5.25-.5a1 1 0 1 1-1 1 1 1 0 0 1 1-1ZM4 7.75A3.75 3.75 0 0 1 7.75 4h8.5A3.75 3.75 0 0 1 20 7.75v8.5A3.75 3.75 0 0 1 16.25 20h-8.5A3.75 3.75 0 0 1 4 16.25Z"/></svg>
+                                    Instagram
+                                </a>
+                                <div class="contacts-dropdown__item">
+                                    <span class="contacts-dropdown__label">Центр:</span>
+                                    <span class="contacts-dropdown__phone"><a href="tel:+375296378877">+375 29 637-88-77</a></span>
+                                </div>
+                                <div class="contacts-dropdown__item">
+                                    <span class="contacts-dropdown__label">Бухгалтерия:</span>
+                                    <span class="contacts-dropdown__phone"><a href="tel:+375297060514">+375 29 706-05-14</a></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav__item">
+                            <button class="nav__link" id="aboutBtn">О нас</button>
+                        </li>
+                    </ul>
+                </nav>
+                <button class="header__mobile-menu" aria-label="Открыть меню">
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title">Создайте незабываемые моменты для всей семьи</h1>
+                <p class="hero__subtitle">
+                    Откройте для себя мир развлечений, где каждый найдет что-то по душе. 
+                    Наши современные аттракционы и уютные зоны отдыха созданы для того, 
+                    чтобы сделать ваш визит особенным.
+                </p>
+                <div class="hero__buttons">
+                    <button class="btn btn--primary" id="openBookingModal">Забронировать сейчас</button>
+                    <a href="#features" class="btn btn--secondary">Узнать больше</a>
+                </div>
+            </div>
+            <div class="hero__image">
+                <img src="images/interior/imgl8151-x-3d6.jpg" alt="Развлекательный центр Базиллион" width="800" height="600">
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats__grid">
+                <div class="stats__item">
+                    <span class="stats__number">10K+</span>
+                    <p class="stats__text">Счастливых семей</p>
+                </div>
+                <div class="stats__item">
+                    <span class="stats__number">99%</span>
+                    <p class="stats__text">Удовлетворенность</p>
+                </div>
+                <div class="stats__item">
+                    <span class="stats__number">50+</span>
+                    <p class="stats__text">Локаций</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают нас</h2>
+            <div class="features__grid">
+                <div class="feature-card">
+                    <div class="feature-card__image">
+                        <img src="images/interior/imgl8141-x-3d5.jpg" alt="Разнообразие аттракционов" width="400" height="300">
+                    </div>
+                    <h3 class="feature-card__title">Разнообразие аттракционов</h3>
+                    <p class="feature-card__text">
+                        От классических игр до современных виртуальных развлечений
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__image">
+                        <img src="images/interior/imgl8230-x-9ff.jpg" alt="Праздничные мероприятия" width="400" height="300">
+                    </div>
+                    <h3 class="feature-card__title">Праздничные мероприятия</h3>
+                    <p class="feature-card__text">
+                        Организация дней рождения и других торжеств
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__image">
+                        <img src="images/interior/imgl8169-x-a49.jpg" alt="Уютные зоны для родителей" width="400" height="300">
+                    </div>
+                    <h3 class="feature-card__title">Уютные зоны для родителей</h3>
+                    <p class="feature-card__text">
+                        Комфортный отдых для взрослых
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Цены -->
+    <section id="prices" class="prices">
+        <div class="container">
+            <h2 class="section-title">Наши цены</h2>
+            <div class="prices__tabs">
+                <button class="prices__tab-btn active" data-tab="attractions">Развлечения</button>
+                <button class="prices__tab-btn" data-tab="balloons">Воздушные шары</button>
+            </div>
+            <div class="prices__content">
+                <div class="prices__tab-content active" id="attractions">
+                    <div class="price-list">
+                        <img src="images/price-lists/attractions.jpg" alt="Прейскурант развлечений" class="price-list__image">
+                    </div>
+                </div>
+                <div class="prices__tab-content" id="balloons">
+                    <div class="price-list">
+                        <img src="images/price-lists/balloons.jpg" alt="Прейскурант воздушных шаров" class="price-list__image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея интерьера -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Наш интерьер</h2>
+            <div class="gallery__grid">
+                <div class="gallery__item">
+                    <img src="images/interior/imgl8141-x-3d5.jpg" alt="Интерьер развлекательного центра" class="gallery__image">
+                </div>
+                <div class="gallery__item">
+                    <img src="images/interior/imgl8145-x-8ab.jpg" alt="Зона отдыха" class="gallery__image">
+                </div>
+                <div class="gallery__item">
+                    <img src="images/interior/imgl8149-x-61d.jpg" alt="Игровая зона" class="gallery__image">
+                </div>
+                <div class="gallery__item">
+                    <img src="images/interior/imgl8151-x-3d6.jpg" alt="Аттракционы" class="gallery__image">
+                </div>
+                <div class="gallery__item">
+                    <img src="images/interior/imgl8155-x-4a0.jpg" alt="Развлекательная зона" class="gallery__image">
+                </div>
+                <div class="gallery__item">
+                    <img src="images/interior/imgl8169-x-a49.jpg" alt="Общий вид" class="gallery__image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Наши центры на карте</h2>
+            <div class="testimonials__content">
+                <div class="testimonials__map-container">
+                    <div class="testimonials__map">
+                        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A9c0ca8efd5a7b4fb13c969369b38eb841c2701a771b726e45b8124787c7777fe&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
+                    </div>
+                    <a href="https://yandex.by/maps/-/CHve4N7g" target="_blank" class="btn btn--primary testimonials__reviews-btn">
+                        Посмотреть отзывы на Яндекс Картах
+                        <svg class="testimonials__reviews-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V9H11V15ZM11 7H9V5H11V7Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="testimonials__grid">
+                    <!-- Карточки отзывов -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <p class="testimonial-card__text">
+                            "Отличное место для семейного отдыха! Дети в восторге от аттракционов, 
+                            а мы с мужем смогли отдохнуть в уютной зоне для родителей."
+                        </p>
+                        <div class="testimonial-card__author">
+                            <img src="images/avatars/female-avatar.webp" alt="Анна" class="testimonial-card__avatar">
+                            <div class="testimonial-card__info">
+                                <h4 class="testimonial-card__name">Анна</h4>
+                                <p class="testimonial-card__status">Мама двоих детей</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <p class="testimonial-card__text">
+                            "Замечательный центр! Дети в полном восторге, а я спокойно могу посидеть в кафе. 
+                            Особенно понравились новые аттракционы."
+                        </p>
+                        <div class="testimonial-card__author">
+                            <img src="images/avatars/male-avatar.jpg" alt="Александр" class="testimonial-card__avatar testimonial-card__avatar--male">
+                            <div class="testimonial-card__info">
+                                <h4 class="testimonial-card__name">Александр</h4>
+                                <p class="testimonial-card__status">Папа троих детей</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <p class="testimonial-card__text">
+                            "Прекрасное место для семейного отдыха! Очень чисто, уютно и безопасно. 
+                            Дети просят прийти снова и снова."
+                        </p>
+                        <div class="testimonial-card__author">
+                            <img src="images/avatars/female-avatar.webp" alt="Мария" class="testimonial-card__avatar">
+                            <div class="testimonial-card__info">
+                                <h4 class="testimonial-card__name">Мария</h4>
+                                <p class="testimonial-card__status">Мама одного ребенка</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <div class="faq__grid">
+                <div class="faq-item">
+                    <h3 class="faq-item__question">Какие развлечения доступны?</h3>
+                    <p class="faq-item__answer">
+                        У нас есть множество аттракционов для разных возрастов: от мягких игровых зон 
+                        для малышей до современных виртуальных развлечений для подростков.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-item__question">С какого возраста можно посещать центр?</h3>
+                    <p class="faq-item__answer">
+                        Наш центр подходит для детей от 1 года до 14 лет. Для самых маленьких есть специальные 
+                        безопасные зоны с мягкими модулями и бассейнами с шариками.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-item__question">Нужно ли сопровождать детей?</h3>
+                    <p class="faq-item__answer">
+                        Детей до 7 лет обязательно должны сопровождать взрослые. Дети старше 7 лет могут 
+                        находиться в центре самостоятельно, но мы рекомендуем присутствие родителей.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-item__question">Можно ли приносить еду и напитки?</h3>
+                    <p class="faq-item__answer">
+                        В центре есть кафе с широким выбором блюд и напитков. Приносить свою еду не рекомендуется, 
+                        но можно взять с собой воду в пластиковой бутылке.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-item__question">Как забронировать день рождения?</h3>
+                    <p class="faq-item__answer">
+                        Для бронирования дня рождения вы можете позвонить нам по телефону или оставить заявку 
+                        через форму на сайте. Мы поможем организовать незабываемый праздник для вашего ребенка.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-item__question">Есть ли скидки для групп?</h3>
+                    <p class="faq-item__answer">
+                        Да, мы предоставляем специальные цены для групп от 10 человек. Также действуют скидки 
+                        для многодетных семей и детей военнослужащих. Подробности уточняйте у администратора.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-item__question">Можно ли оставить ребенка одного?</h3>
+                    <p class="faq-item__answer">
+                        Мы не предоставляем услуги присмотра за детьми. Ответственность за безопасность 
+                        и поведение детей несут сопровождающие их взрослые.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-item__question">Какие меры безопасности приняты?</h3>
+                    <p class="faq-item__answer">
+                        Все аттракционы регулярно проверяются на безопасность. В центре работает 
+                        профессиональный персонал, установлена система видеонаблюдения. Дети до 7 лет 
+                        должны быть в сопровождении взрослых.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__logo">
+                    <img src="images/logo/logo.png" alt="Базиллион" width="180" height="90">
+                </div>
+                <div class="footer__info">
+                    <p>© 2024 Базиллион. Все права защищены.</p>
+                    <a href="диплом/agreement.docx" class="footer__link" download>Публичный договор на оказание услуг</a>
+                    2024, © , Юридическое лицо: ООО «Базиллион Групп», УНП: 192407404
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно бронирования -->
+    <div class="modal" id="bookingModal">
+        <div class="modal__content">
+            <button class="modal__close" aria-label="Закрыть окно">×</button>
+            <h2 class="modal__title">Забронировать посещение</h2>
+            <form class="modal__form" id="bookingForm">
+                <div class="form-group">
+                    <label for="bookingName">Имя</label>
+                    <input type="text" id="bookingName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookingPhone">Телефон</label>
+                    <input type="tel" id="bookingPhone" name="phone" required placeholder="+375... или 8... или 29...">
+                </div>
+                <div class="form-group">
+                    <label for="bookingCenter">Выберите центр</label>
+                    <select id="bookingCenter" name="center" required>
+                        <option value="" disabled selected>Выберите центр</option>
+                        <option value="Денисовская, 8">Минск, Денисовская, 8 (2-ой этаж)</option>
+                        <option value="Никифорова, 51">Минск, Никифорова, 51 (2-ой этаж)</option>
+                        <option value="Макаёнка 11">Минск, Макаёнка 11, 1-й этаж</option>
+                        <option value="Голубка, 2">Минск, Владислава Голубка, 2 (2-ой этаж)</option>
+                        <option value="Нововиленская 39">Минск, Нововиленская 39, подъезд 9, этаж 1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn--primary">Забронировать</button>
+                </div>
+            </form>
+            <div class="form-message" id="bookingFormMessage"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно "О нас" -->
+    <div class="modal" id="aboutModal">
+        <div class="modal__content modal__content--large">
+            <button class="modal__close" aria-label="Закрыть окно">×</button>
+            <h2 class="modal__title">О компании</h2>
+            <div class="about-content">
+                <p class="about-content__intro">
+                    Сеть развлекательных центров «Базиллион» — настоящий рай для детей и их родителей!
+                </p>
+                
+                <div class="about-content__section">
+                    <p>
+                        В наших центрах есть большие и маленькие лабиринты, горки, воздушные пушки, 
+                        сухие шариковые бассейны, современные игровые автоматы, батуты, роллердром, 
+                        зоны для проведения дней рождения, аниматоры, аквагрим и многое другое.
+                    </p>
+                </div>
+
+                <div class="about-content__section">
+                    <h3>Безопасность</h3>
+                    <p>
+                        Безопасность аттракционов соответствует всем необходимым требованиям. 
+                        На травмобезопасность лабиринты и батуты проверяются несколько раз в неделю.
+                    </p>
+                </div>
+
+                <div class="about-content__section">
+                    <h3>Скидки</h3>
+                    <p>
+                        Дети из многодетных семей, а также военнослужащих, погибших или получивших 
+                        инвалидность на службе, посещают Центр с 20% скидкой при предъявлении соответствующих документов.
+                    </p>
+                </div>
+
+                <div class="about-content__footer">
+                    <p>Юридическое лицо: ООО "Базиллион Групп"</p>
+                    <p>УНП: 192407404</p>
+                    <a href="agreement.docx" class="btn btn--secondary about-content__download" download>
+                        <svg class="about-content__download-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
+                        </svg>
+                        Скачать публичный договор
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно с расписанием -->
+    <div class="modal" id="scheduleModal">
+        <div class="modal__content modal__content--large">
+            <button class="modal__close" aria-label="Закрыть окно">×</button>
+            <h2 class="modal__title">График работы центров</h2>
+            <div class="schedule-content">
+                <div class="schedule-item">
+                    <h3 class="schedule-item__title">Минск, Денисовская</h3>
+                    <p class="schedule-item__address">ул. Денисовская, 8 (2-ой этаж)</p>
+                    <p class="schedule-item__time">ежедневно с 10:00 до 22:00</p>
+                </div>
+
+                <div class="schedule-item">
+                    <h3 class="schedule-item__title">Минск, Никифорова</h3>
+                    <p class="schedule-item__address">ул. Никифорова, 51 (2-ой этаж)</p>
+                    <p class="schedule-item__time">ежедневно с 10:00 до 21:00</p>
+                    <p class="schedule-item__time schedule-item__time--special">вторник с 12:00 до 21:00</p>
+                </div>
+
+                <div class="schedule-item">
+                    <h3 class="schedule-item__title">Минск, Макаёнка</h3>
+                    <p class="schedule-item__address">ул. Макаёнка 11, 1-й этаж</p>
+                    <p class="schedule-item__time">ежедневно с 10:00 до 21:00</p>
+                    <p class="schedule-item__time schedule-item__time--special">вторник с 12:00 до 21:00</p>
+                    <p class="schedule-item__time schedule-item__time--special">сб-вс с 10:00 до 21:00</p>
+                </div>
+
+                <div class="schedule-item">
+                    <h3 class="schedule-item__title">Минск, Голубка</h3>
+                    <p class="schedule-item__address">ул. Владислава Голубка, 2 (2-ой этаж)</p>
+                    <p class="schedule-item__time">ежедневно с 12:00 до 21:00</p>
+                    <p class="schedule-item__time schedule-item__time--special">сб-вс с 10:00 до 21:00</p>
+                </div>
+
+                <div class="schedule-item">
+                    <h3 class="schedule-item__title">Минск, Нововиленская</h3>
+                    <p class="schedule-item__address">ул. Нововиленская 39, подъезд 9, этаж 1</p>
+                    <p class="schedule-item__time">пн-пт с 10:00 до 21:00</p>
+                    <p class="schedule-item__time schedule-item__time--special">сб-вс с 10:00 до 21:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html> 
