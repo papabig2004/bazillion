@@ -1,5 +1,22 @@
 console.log('JavaScript файл загружен');
 
+function animateCounter(element, target, duration, suffix = '') {
+    let start = 0;
+    let startTime = null;
+    const step = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const value = Math.floor(progress * (target - start) + start);
+        element.textContent = value + suffix;
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        } else {
+            element.textContent = target + suffix;
+        }
+    };
+    requestAnimationFrame(step);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM загружен');
 
@@ -319,4 +336,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Анимация счетчиков статистики
+    const counters = document.querySelectorAll('.stats__number');
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'), 10);
+        const suffix = counter.getAttribute('data-suffix') || '';
+        animateCounter(counter, target, 1200, suffix); // 1200 мс = 1.2 сек
+    });
 }); 
