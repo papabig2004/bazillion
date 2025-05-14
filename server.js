@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const axios = require('axios');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,12 +24,30 @@ app.post('/api/lead', async (req, res) => {
     try {
         const { name, phone, center } = req.body;
         
-        // Здесь можно добавить логику для отправки данных в Bitrix24
-        // Например, через n8n или напрямую через API Bitrix24
+        // Отправка данных в Bitrix24
+        const BITRIX_WEBHOOK_URL = process.env.BITRIX_WEBHOOK_URL;
         
-        console.log('Received lead:', { name, phone, center });
+        if (!BITRIX_WEBHOOK_URL) {
+            console.error('BITRIX_WEBHOOK_URL не настроен');
+            return res.status(500).json({ success: false, message: 'Ошибка конфигурации сервера' });
+        }
+
+        const bitrixData = {
+            fields: {
+                TITLE: `Заявка с сайта - ${center}`,
+                NAME: name,
+                PHONE: [{ VALUE: phone, VALUE_TYPE: 'WORK' }],
+                COMMENTS: `Центр: ${center}`,
+                SOURCE_ID: 'WEB',
+                SOURCE_DESCRIPTION: 'Заявка с сайта Базиллион'
+            }
+        };
+
+        await axios.post(BITRIX_WEBHOOK_URL, bitrixData);
         
-        res.json({ success: true, message: 'Lead received successfully' });
+        console.log('Lead sent to Bitrix24:', { name, phone, center });
+        
+        res.json({ success: true, message: 'Lead received and sent to Bitrix24 successfully' });
     } catch (error) {
         console.error('Error processing lead:', error);
         res.status(500).json({ success: false, message: 'Error processing lead' });
