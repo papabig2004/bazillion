@@ -54,6 +54,9 @@ app.post('/api/lead', async (req, res) => {
 
         const bitrixUrl = `https://${BITRIX_DOMAIN}/rest/${BITRIX_USER_ID}/${BITRIX_WEBHOOK_TOKEN}/crm.lead.add.json`;
         
+        // Временно изменяем URL для тестирования ошибки
+        const testErrorUrl = 'https://invalid-domain.bitrix24.ru/rest/1/invalid-token/crm.lead.add.json';
+        
         const bitrixData = {
             fields: {
                 TITLE: `Заявка с сайта - ${center}`,
@@ -66,12 +69,12 @@ app.post('/api/lead', async (req, res) => {
         };
 
         console.log('Подготовлены данные для отправки в Bitrix24:', {
-            url: bitrixUrl,
+            url: testErrorUrl, // Используем тестовый URL
             data: bitrixData,
             timestamp: new Date().toISOString()
         });
 
-        const response = await axios.post(bitrixUrl, bitrixData);
+        const response = await axios.post(testErrorUrl, bitrixData); // Используем тестовый URL
         
         console.log('Ответ от Bitrix24:', {
             status: response.status,
