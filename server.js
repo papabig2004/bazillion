@@ -18,7 +18,8 @@ app.use(cors({
 }));
 
 // Статические файлы
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // API endpoint для обработки заявок
 app.post('/api/lead', async (req, res) => {
@@ -92,9 +93,30 @@ app.post('/api/lead', async (req, res) => {
 
 // Маршрут для главной страницы
 app.get('/', (req, res) => {
-    // Обновление: Добавлен комментарий для нового деплоя на Render
-    // Дата: 2024
-    res.sendFile(path.join(__dirname, 'index.html'));
+    try {
+        const indexPath = path.join(__dirname, 'index.html');
+        console.log('Attempting to serve index.html from:', indexPath);
+        res.sendFile(indexPath, (err) => {
+            if (err) {
+                console.error('Error serving index.html:', err);
+                res.status(500).send('Error loading page');
+            }
+        });
+    } catch (error) {
+        console.error('Error in root route:', error);
+        res.status(500).send('Server error');
+    }
+});
+
+// Обработка 404
+app.use((req, res) => {
+    res.status(404).send('Page not found');
+});
+
+// Обработка ошибок
+app.use((err, req, res, next) => {
+    console.error('Server error:', err);
+    res.status(500).send('Server error');
 });
 
 // Запуск сервера
