@@ -92,6 +92,8 @@ app.post('/api/lead', async (req, res) => {
 
 // Маршрут для главной страницы
 app.get('/', (req, res) => {
+    // Обновление: Добавлен комментарий для нового деплоя на Render
+    // Дата: 2024
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
