@@ -99,5 +99,12 @@ app.get('/', (req, res) => {
 
 // Запуск сервера
 app.listen(port, () => {
+    console.log('=== Конфигурация сервера ===');
+    console.log(`Порт: ${port}`);
+    console.log('Переменные окружения:');
+    console.log('- BITRIX_DOMAIN:', process.env.BITRIX_DOMAIN ? 'Настроен' : 'Не настроен');
+    console.log('- BITRIX_USER_ID:', process.env.BITRIX_USER_ID ? 'Настроен' : 'Не настроен');
+    console.log('- BITRIX_WEBHOOK_TOKEN:', process.env.BITRIX_WEBHOOK_TOKEN ? 'Настроен' : 'Не настроен');
+    console.log('==========================');
     console.log(`Server is running on port ${port}`);
 }); 
